@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!-- Configuración del charset y la vista para dispositivos móviles -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Enlace al archivo de estilos CSS externo -->
+
+    <title>Curriculum Vitae</title>
+    <link rel="stylesheet" href="style.css">
+
+<script>
+// Función para validar los datos del formulario antes de enviarlo
+
+function validarFormulario(event) {
+    event.preventDefault();
+
+// Recuperación de los valores ingresados en los campos del formulario
+
+    var nombre = document.getElementById('nombre').value;
+            var apellidos = document.getElementById('apellidos').value;
+            var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+            var calle = document.getElementById('calle').value;
+            var numero = document.getElementById('numero').value;
+            var provincia = document.getElementById('provincia').value;
+            var telefono = document.getElementById('telefono').value;
+            var email = document.getElementById('email').value;
+            var idiomas = document.getElementById('idiomas').value;
+        
+// Verificación de que todos los campos requeridos estén llenos
+
+    if (nombre === "" || apellidos === "" || fecha_nacimiento === "" || calle === ""|| numero === "" || provincia === "" || telefono === "" || email === "" || idiomas === ""){
+        alert ("Por favor, complete todos los campos obligatorios.");
+        return false;
+    }
+
+// Validación del formato del correo electrónico utilizando una expresión regular
+    var regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!regexEmail.test(email)){
+        alert("Por favor, ingrese un correo electrónico válido.");
+        return false;
+    }
+
+// Validación del formato del teléfono (debe ser un número de 9 dígitos)
+    var regexTelefono = /^\d{9}$/;
+    if (!regexTelefono.test(telefono)){
+        alert("Por favor, ingrese un número de teléfono válido.");
+        return false;
+    }
+
+// Verificación de la fecha de nacimiento (no debe ser mayor que la fecha actual)
+    var fechaActual = new Date();
+    var fecha_nacimientoDate = new Date(fecha_nacimiento);
+
+    if (isNaN(fecha_nacimientoDate.getTime())) {
+        alert("Por favor ingrese una fecha válida.");
+        return false;
+    }
+
+    if (fecha_nacimientoDate > fechaActual) {
+        alert("Por favor ingrese una fecha de nacimiento correcta.");
+        return false;}
+
+// Si todas las validaciones son correctas, redirige a la página de confirmación
+        window.location.href = "confirmacion.html"; 
+        return true; 
+}
+</script>
+</head>
+<body>
+<!-- Título principal de la página -->
+
+    <h1>Formulario Currículum Vitae </h1>
+
+<!-- Formulario para ingresar la información del CV -->
+
+<form id="formulario" method="post" enctype="multipart/form-data" onsubmit="validarFormulario(event)">
+    <p>Bienvenido/a al generador de currículum en línea. 
+        Por favor, completa los campos a continuación con tus datos personales, experiencia laboral, habilidades y otros detalles relevantes. 
+        Una vez finalizado, podrás usar esta información para crear un CV profesional que destaque tus mejores cualidades. 
+    </p>
+    <p>Asegúrate de ingresar toda la información de forma precisa y clara. ¡Esto ayudará a que tu currículum sea más efectivo!</p>
+    <h3><strong>Información personal</strong></h3>
+
+ <!-- Campo para el nombre -->
+    <label for="nombre">Nombre:</label>
+    <input type="text"id="nombre" name="nombre" placeholder="Ingresa nombre"required> 
+
+    &nbsp;&nbsp;&nbsp;
+
+ <!-- Campo para los apellidos -->
+    <label for="apellidos">Apellidos</label>
+    <input type="text"id="apellidos" name="apellidos" placeholder="Ingresa apellidos"required>
+    <br><br>
+
+ <!-- Campo para la fecha de nacimiento -->
+    <h3><strong>Fecha de nacimiento</strong></h3>
+    <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+
+    <div id="fecha_formateada"></div>
+
+<!-- Campo para la calle -->
+    <h3><strong>Calle</strong></h3>
+    <label for="calle">Calle</label>
+    <input type="text"id="calle" name="calle" placeholder="Ingresa Calle"required>
+
+    &nbsp;&nbsp;&nbsp;
+
+<!-- Campo para el número de la calle -->
+    <label for="numero">Número</label>
+    <input type="text"id="numero" name="numero" placeholder="Ingresa nº"required>
+
+    &nbsp;&nbsp;&nbsp;
+
+<!-- Campo para la provincia -->
+    <label for="provincia">Provincia</label>
+    <input type="text"id="provincia" name="provincia" placeholder="Ingresa provincia"required>
+ 
+<!-- Campo para el teléfono -->
+    <h3><strong>Teléfono</strong></h3>
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" placeholder="Ingresa número teléfono" pattern="[0-9]{9}" required>
+
+<!-- Campo para el correo electrónico -->   
+    <h3><strong>Correo Electrónico</strong></h3>
+    <label for="email">Correo Electrónico:</label>
+    <input type="email" id="email" name="email" placeholder="Ingresa tu correo"required>
+
+<!-- Campo para los idiomas -->
+    <h3><strong>Idiomas</strong></h3>
+    <label for="idiomas">idiomas:</label>
+    <input type="text" id="idiomas" name="idiomas" placeholder="(ej: Español, Inglés)"required>
+
+<!-- Campo para subir una imagen -->
+    <h3><strong>Imagen personal (Opcional)</strong></h3>
+    <label for="imagen">Sube tu imagen:</label>
+    <input type="file" id="imagen" name="imagen" accept="image/*">
+    <br><br>
+
+<!-- Campo para el título obtenido -->
+    <h3><strong>Educación</strong></h3>
+    <label for="titulo">Título obtenido:</label>
+    <input type="text" id="titulo" name="titulo" placeholder="Título obtenido"required>
+
+<br><br>
+ <!-- Campo para la institución académica -->
+    <label for="institucion_academica">Institución académica:</label>
+    <input type="text" id="institucion_academica" name="institucion_academica" placeholder="Institución académica"required>
+
+<br><br>
+<!-- Campo para el año de inicio y fin de la educación -->
+    <label for="año_inicio_fin">Año inicio y fin:</label>
+    <input type="text" id="año_inicio_fin" name="año_inicio_fin" placeholder="Año inicio y fin (ej: 2002-2006)"required>
+
+<!-- Campo para el nombre de la empresa -->
+    <h3><strong>Experiencia laboral</strong></h3>
+    <label for="empresa">Nombre empresa:</label>
+    <input type="text" id="empresa" name="empresa" placeholder="Empresa"required>
+
+<br><br>
+<!-- Campo para el puesto --> 
+    <label for="puesto">Puesto:</label>
+    <input type="text" id="puesto" name="puesto" placeholder="Puesto"required>
+
+<br><br>
+<!-- Campo para la duración del empleo --> 
+    <label for="duracion">Duración:</label>
+    <input type="text" id="duracion" name="duracion" placeholder="Duración (ej: 2 años)"required>
+
+<br><br>
+<!-- Área para describir la experiencia laboral -->
+    <h3><strong>Describe tu experiencia</strong></h3>
+    <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describe tu experiencia"required></textarea>
+
+    <h3><strong>Adjuntar Currículum Vitae y/o archivos relevantes</strong></h3>
+<!-- Campo para adjuntar archivos -->
+      <label for="archivo">Adjuntar archivo:</label>
+      <input type="file" id="archivo" name="archivo" accept=".jpg, .png, .pdf" required>
+
+<!-- Botón para enviar el formulario -->  
+    <button type="submit">Enviar</button>
+
+</form>
+
+</body>
+</html>
